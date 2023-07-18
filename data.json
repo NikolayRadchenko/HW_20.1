@@ -1,0 +1,104 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Овощи",
+      "description": "Очень полезные"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Фрукты",
+      "description": "Очень вкусные"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Крупы",
+      "description": "Можно сделать кашу"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Морковь",
+      "description": "Полезно для зрения",
+      "photo": "",
+      "category": 1,
+      "price": 12,
+      "date_make": "2023-07-18",
+      "date_update": "2023-07-18"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Капуста",
+      "description": "Хороша в пирожках",
+      "photo": "",
+      "category": 1,
+      "price": 14,
+      "date_make": "2023-07-18",
+      "date_update": "2023-07-18"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Ананас",
+      "description": "Ест тебя пока ты ешь его",
+      "photo": "",
+      "category": 2,
+      "price": 20,
+      "date_make": "2023-07-18",
+      "date_update": "2023-07-18"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Апельсин",
+      "description": "Осторожно возможно попадание в глаза",
+      "photo": "",
+      "category": 2,
+      "price": 17,
+      "date_make": "2023-07-18",
+      "date_update": "2023-07-18"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Манка",
+      "description": "Каша детства",
+      "photo": "",
+      "category": 3,
+      "price": 2,
+      "date_make": "2023-07-18",
+      "date_update": "2023-07-18"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Гречка",
+      "description": "Хороша с молоком",
+      "photo": "",
+      "category": 3,
+      "price": 3,
+      "date_make": "2023-07-18",
+      "date_update": "2023-07-18"
+    }
+  }
+]
