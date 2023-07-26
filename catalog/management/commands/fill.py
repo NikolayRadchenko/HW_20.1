@@ -1,6 +1,7 @@
 from django.core.management import BaseCommand
 
 from catalog.models import Product, Category
+from datetime import date
 
 
 class Command(BaseCommand):
@@ -16,18 +17,18 @@ class Command(BaseCommand):
         for category_item in category_list:
             Category.objects.create(**category_item)
 
-        category1 = Category.objects.get(name='Кроссовки')
-        category2 = Category.objects.get(name='Одежда')
+        category_sneakers = Category.objects.get(name='Кроссовки')
+        category_clothes = Category.objects.get(name='Одежда')
 
         product_list = [
-            {'name': 'Nike', 'category': f'{category1}', 'price': '12', 'date_make': '18.07.2023',
-             'date_update':  '18.07.2023'},
-            {'name': 'Adidas', 'category': f'{category1}', 'price': '14', 'date_make': '18.07.2023',
-             'date_update': '18.07.2023'},
-            {'name': 'Майка Nike', 'category': f'{category2}', 'price': '20', 'date_make': '18.07.2023',
-             'date_update': '18.07.2023'},
-            {'name': 'Футболка Adidas', 'category': f'{category2}', 'price': '17', 'date_make': '18.07.2023',
-             'date_update': '18.07.2023'},
+            {'name': 'Nike', 'category': category_sneakers, 'price': '12', 'date_make': date.today().isoformat(),
+             'date_update':  date.today().isoformat()},
+            {'name': 'Adidas', 'category': category_sneakers, 'price': '14', 'date_make': date.today().isoformat(),
+             'date_update': date.today().isoformat()},
+            {'name': 'Майка Nike', 'category': category_clothes, 'price': '20', 'date_make': date.today().isoformat(),
+             'date_update': date.today().isoformat()},
+            {'name': 'Футболка Adidas', 'category': category_clothes, 'price': '17', 'date_make': date.today().isoformat(),
+             'date_update': date.today().isoformat()},
         ]
 
         for product_item in product_list:
