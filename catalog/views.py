@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
-from catalog.models import Category, Product
-
+from catalog.models import Category, Sneakers
 
 def home(request):
     context = {
@@ -20,27 +21,29 @@ def contacts(request):
     return render(request, 'catalog/contacts.html')
 
 
-def categories(request):
-    context = {
-        'object_list': Category.objects.all(),
+class CategoryListView(ListView):
+    model = Category
+
+    extra_context = {
         'title': 'Sneakers - Категории'
     }
-    return render(request, 'catalog/categories.html', context)
 
 
-def sneakers(request):
-    context = {
-        'object_list': Product.objects.filter(category_id=Category.objects.filter(name='Кроссовки').get().id),
+class SneakersListView(ListView):
+    model = Sneakers
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(category_id=Category.objects.filter(name='Кроссовки').get().id)
+        return queryset
+
+    extra_context = {
         'title': 'Sneakers - Кроссовки'
     }
-    return render(request, 'catalog/sneakers.html', context)
 
 
-def sneakers_id(request, sneakers_id=1):
-    context = {
-        'object': Product.objects.filter(category_id=Category.objects.filter(name='Кроссовки').get().id),
-        'id': Product.objects.filter(id=request.get(id)).get().id,
-        'title': f'Sneakers - {Product.objects.filter(id=request.get(id)).get().name}'
-    }
-    sneakers_id = Product.objects.filter(id=request.get(id)).get().id
-    return render(request, 'catalog/sneakers.html', context)
+class SneakersCreateView(CreateView):
+    model = Sneakers
+
+    fields = ('name', 'description',)
+    success_url = reverse_lazy('catalog:categories')

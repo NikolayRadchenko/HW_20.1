@@ -2,6 +2,9 @@
 {% load tags %}
 {% block content %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col-12 mb-5">
+            <a href="{% url 'catalog:sneakers_create' %}" class="btn btn-primary">Добавить товар</a>
+        </div>
         {% for object in object_list %}
             <div class="col">
                 <div class="card shadow-sm">
@@ -14,7 +17,8 @@
                         <p class="card-text">{{ object.price }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="#" type="button" class="btn btn-sm btn-outline-secondary">На страницу товара</a>
+                                <a href="#" type="button" class="btn btn-sm btn-outline-secondary">На страницу
+                                    товара</a>
                             </div>
                         </div>
                     </div>
