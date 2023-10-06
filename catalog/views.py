@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
-from pytils import slugify
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView
 
-from catalog.models import Category, Sneakers, Blog
+from catalog.forms import SneakersForm
+from catalog.models import Category, Sneakers
 
 
 def home(request):
@@ -46,68 +46,11 @@ class SneakersListView(ListView):
 
 class SneakersCreateView(CreateView):
     model = Sneakers
-
-    fields = ('name', 'description',)
+    form_class = SneakersForm
     success_url = reverse_lazy('catalog:categories')
 
 
-class BlogListView(ListView):
-    model = Blog
-
-    def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, *kwargs)
-        queryset = queryset.filter(is_published=True)
-        return queryset
-
-
-class BlogCreateView(CreateView):
-    model = Blog
-
-    fields = ('header', 'content',)
-    success_url = reverse_lazy('catalog:create_blog')
-
-    def form_valid(self, form):
-        if form.is_valid():
-            new_mat = form.save()
-            new_mat.slug = slugify(new_mat.title)
-            new_mat.save()
-
-        return super().form_valid(form)
-
-
-class BlogDetailView(DetailView):
-    model = Blog
-
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        self.object.views_count += 1
-        self.object.save()
-        return self.object
-
-
-class BlogUpdateView(UpdateView):
-    model = Blog
-
-    fields = ('header', 'content', 'photo')
-    success_url = reverse_lazy('catalog:update_blog')
-
-    def form_valid(self, form):
-        if form.is_valid():
-            new_mat = form.save()
-            new_mat.slug = slugify(new_mat.title)
-            new_mat.save()
-
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('catalog:view_blog', args=[self.kwargs.get('pk')])
-
-
-class BlogDeleteView(DeleteView):
-    model = Blog
-
-    fields = ('header', 'content', 'photo')
-    success_url = reverse_lazy('catalog:delete_blog')
-
-
-
+class SneakersUpdateView(UpdateView):
+    model = Sneakers
+    form_class = SneakersForm
+    success_url = reverse_lazy('catalog:categories')
